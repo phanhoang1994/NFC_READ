@@ -2,7 +2,7 @@
 /**************************************************************************/
 #include <SPI.h>
 #include "Adafruit_PN532.h"
-#include <Eeprom24Cxx.h>
+#include "Eeprom24Cxx.h"
 #include "function_nfc.h"
 
 #define PN532_SCK  (13)
