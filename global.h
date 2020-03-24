@@ -17,7 +17,7 @@
 #define ADD           'T'
 #define DELETE        'D'
 
-#define BLOCK         1 // from 1 --> 9
+#define BLOCK         1 // from 1 --> 10
 
 extern uint8_t uid[7];//Buffer to store the returned UID
 

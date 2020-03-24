@@ -24,11 +24,11 @@ extern void beep(uint16_t time_delay_ms);
           if(strstr((char *)g_ucBuffRead, "MASTER") != NULL){
             g_ucModeCard = MASTER;count++;
             if(count == 1){
-              if(g_ucBuffRead[6]=='T'){beep(2000);Serial.println("beeeeeeeeeeeeeeeeeeeep");Serial.println("MODE SETTING: ADD TAGS");}
-              else if(g_ucBuffRead[6]=='D'){ beep(2000);Serial.println("beeeeeeeeeeeeeeeeeeeep");Serial.println("MODE SETTING: DELETE TAGS");}
-              else {Serial.println("MODE SETTING: NO FUNCTION");}
+              if(g_ucBuffRead[6]=='T'){beep(2000);}
+              else if(g_ucBuffRead[6]=='D'){beep(2000);;}
+              else {;}
             }
-            else {beep(500);beep(500);beep(500);Serial.println("beep beep beep");Serial.println("MODE USER");}
+            else {beep(500);beep(500);beep(500);}
           }
           if((strstr((char *)g_ucBuffRead, "SLAVE") != NULL)&&(g_ucBuffRead[5]==BLOCK)){g_ucModeCard = USER; have_new_user = 1;}
        //Khi doc thay the master thi luu id/mode/mark/modeD/SttD/numdel-------------------
