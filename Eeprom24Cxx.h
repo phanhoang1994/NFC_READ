@@ -8,7 +8,7 @@ file for Eeprom24Cxx
 #include <EEPROM.h>
 
 #define eeprom_on_arduino 0
-// chọn eeprom của arduino
+// chọn eeprom của vi điều khiển
 #define eeprom_on_ic 1
 // chọn eeprom của ic ngoại vi
 class Eeprom24C 

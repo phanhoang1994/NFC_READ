@@ -12,12 +12,12 @@
 
 #define EEPROM_START   11
 #define SIZE           6
-#define EEPROM_FINISH  8180
 
 #define ADD           'T'
 #define DELETE        'D'
 
 #define BLOCK         1 // from 1 --> 10
+#define Rdelay        8000//milis
 
 extern uint8_t uid[7];//Buffer to store the returned UID
 

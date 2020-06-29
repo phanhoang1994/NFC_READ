@@ -10,15 +10,11 @@ Eeprom24C::Eeprom24C(  unsigned int size_m, byte deviceAddress){
     m_deviceAddress = deviceAddress;
     size_memory=size_m;
     size_bytes=size_m*128; //  size_bytes=(size_m*1024)/8; 
-    // tìm số byte mà ic có thể lưu trữ
-    // ví dụ ic 24c04 có (4*1024)/8=512 bytes
-    //byte đầu tiên là 0. byte cuối là 511
      select_eeprom=eeprom_on_ic;// chọn phương thức lưu trên ic
      Wire.begin();
 }
 Eeprom24C::Eeprom24C(){
-   
-     select_eeprom=eeprom_on_arduino;// chọn phương thức lưu trên arduino
+     select_eeprom=eeprom_on_arduino;// chọn phương thức lưu trên vi điều khiển
 }
 
 void Eeprom24C::write_byte_eeprom_ic(unsigned int   address,byte  data){
@@ -35,7 +31,7 @@ void Eeprom24C::write_byte_eeprom_ic(unsigned int   address,byte  data){
     }else if(size_memory<=16){ 
     Wire.beginTransmission((byte)(m_deviceAddress | ((address >> 8) & 0x07)));
     Wire.write(address & 0xFF);
-    } else if(size_memory<=256){
+    } else if(size_memory<=512){
         //24c32, 24c64, 24c128, 24c256
 
     Wire.beginTransmission(m_deviceAddress);
@@ -64,7 +60,7 @@ if(address>=size_bytes){
     Wire.write(address & 0xFF);
     Wire.endTransmission();
     Wire.requestFrom((byte)(m_deviceAddress | ((address >> 8) & 0x07)), (byte)1);
-   }else if(size_memory<=256){
+   }else if(size_memory<=512){
     Wire.beginTransmission(m_deviceAddress);
     Wire.write(address >> 8);
     Wire.write(address & 0xFF);

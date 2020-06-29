@@ -5,7 +5,7 @@
 */
 
 #include <stdlib.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include "Eeprom24Cxx.h"
 #include "function_nfc.h"
 
@@ -24,11 +24,11 @@ extern void beep(uint16_t time_delay_ms);
           if(strstr((char *)g_ucBuffRead, "MASTER") != NULL){
             g_ucModeCard = MASTER;count++;
             if(count == 1){
-              if(g_ucBuffRead[6]=='T'){beep(2000);}
-              else if(g_ucBuffRead[6]=='D'){beep(2000);;}
+              if(g_ucBuffRead[6]=='T'){beep(100);delay(300);beep(1000);}
+              else if(g_ucBuffRead[6]=='D'){beep(100);delay(300);beep(100);delay(300);beep(1000);}
               else {;}
             }
-            else {beep(500);beep(500);beep(500);}
+            else {beep(100);delay(100);beep(100);delay(100);beep(100);}
           }
           if((strstr((char *)g_ucBuffRead, "SLAVE") != NULL)&&(g_ucBuffRead[5]==BLOCK)){g_ucModeCard = USER; have_new_user = 1;}
        //Khi doc thay the master thi luu id/mode/mark/modeD/SttD/numdel-------------------
@@ -89,7 +89,7 @@ extern void beep(uint16_t time_delay_ms);
       if(eeprom.read_1_byte(AddrEeprom+5) != cardNFCUser.id.ui8[3])   {return false;}
     return true;
    }
-//DELETE EEPROM
+//DELETE EEPROM WITH ONLY "THE XOA"
 bool FUN_NFC::DeleteDataEeprom (unsigned int Addr,unsigned int Num){
   uint16_t i;
     for(i=0;i<Num;i++){eeprom.write_1_byte(Addr+i,0x00);}               
