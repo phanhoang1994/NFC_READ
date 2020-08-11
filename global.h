@@ -17,7 +17,7 @@
 #define DELETE        'D'
 
 #define BLOCK         1 // from 1 --> 10
-#define Rdelay        8000//milis
+#define TIME_RELAY_ON        8//8s
 
 extern uint8_t uid[7];//Buffer to store the returned UID
 

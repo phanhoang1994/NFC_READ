@@ -16,14 +16,16 @@ extern unsigned char g_ucBuffRead[16];
 extern uint8_t g_bUpdateData;
 extern uint8_t ModeWork;
 extern void beep(uint16_t time_delay_ms);
+extern unsigned int ulTimeLock;
 //----------------------------------------------------------------------------
 //Ham cap nhat thong tin va du lieu trong the tag
   void FUN_NFC::updateDatafromCard (){
        if(g_bUpdateData){
        //Xac dinh xem the nay la thẻ master hay thẻ user
           if(strstr((char *)g_ucBuffRead, "MASTER") != NULL){
-            g_ucModeCard = MASTER;count++;
-            if(count == 1){
+            g_ucModeCard = MASTER;have_new_master++;
+            if(have_new_master == 1){
+              ulTimeLock = 30;//30s
               if(g_ucBuffRead[6]=='T'){beep(100);delay(300);beep(1000);}
               else if(g_ucBuffRead[6]=='D'){beep(100);delay(300);beep(100);delay(300);beep(1000);}
               else {;}
@@ -32,7 +34,7 @@ extern void beep(uint16_t time_delay_ms);
           }
           if((strstr((char *)g_ucBuffRead, "SLAVE") != NULL)&&(g_ucBuffRead[5]==BLOCK)){g_ucModeCard = USER; have_new_user = 1;}
        //Khi doc thay the master thi luu id/mode/mark/modeD/SttD/numdel-------------------
-        if(count==1){
+        if(have_new_master==1){
           if(g_ucModeCard == MASTER){
             ModeWork = SET;
            //chuc nang cua the marster
@@ -47,7 +49,7 @@ extern void beep(uint16_t time_delay_ms);
             cardNFCMaster.numdel  = g_ucBuffRead[14];
           }
         }
-        else {ModeWork = READ; count=0;have_new_user = 0;}
+        else {ModeWork = READ; have_new_master=0;have_new_user = 0;}
        //Khi doc thay the USER thi luu id/block/stt1/stt2/Data1/../Data4-------------------
            if(g_ucModeCard == USER){
              //ID

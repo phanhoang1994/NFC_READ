@@ -56,8 +56,8 @@ class FUN_NFC{
    bool readDataEeprom ();
    bool CompareData ();
    bool DeleteDataEeprom (unsigned int Addr,unsigned int Num);
+   uint8_t have_new_master;
  private: 
-   uint8_t count;
 };
 
 #endif
